@@ -3,6 +3,8 @@
 The Expense Tracker Web App is a Django-based application designed to help users manage their finances efficiently. It provides various features to track income, expenses, savings, and budgeting. Users can also register, log in, and manage their profiles. The application aims to simplify financial management and provide insights into one's financial status.
 
 ![WhatsApp Image 2023-09-22 at 5 48 34 PM](https://github.com/Rahul-2202/Expense_Tracker_App/assets/80082925/c79aefa1-eb11-44e7-8d3f-a36abce9c58d)
+
+
 <img width="929" alt="image" src="https://github.com/Rahul-2202/Expense_Tracker_App/assets/80082925/5ec3eec9-6d04-42d7-b060-1a84e9082236">
 
 ## Features
