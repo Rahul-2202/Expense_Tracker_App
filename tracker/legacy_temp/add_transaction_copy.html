@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Transaction</title>
+  </head>
+  <body>
+    <h2>Add Transaction</h2>
+
+    <form method="POST" action="{% url 'add_transaction' %}">
+      {% csrf_token %}
+
+      <!-- Date Input -->
+      <label for="id_date">Date:</label>
+      <input type="date" id="id_date" name="date" required />
+
+      <!-- Amount Input -->
+      <label for="id_amount">Amount:</label>
+      <input type="number" step="0.01" id="id_amount" name="amount" required />
+
+      <!-- Description Input -->
+      <label for="id_description">Description:</label>
+      <input type="text" id="id_description" name="description" required />
+
+      <!-- Transaction Type (Income or Expense) -->
+      <label for="id_type">Type:</label>
+      <select id="id_type" name="type" required>
+        <option value="+" selected>Income</option>
+        <option value="-">Expense</option>
+      </select>
+
+      <!-- Expense Category Dropdown -->
+      {{ form.category.label_tag }} {{ form.category }}
+
+      <button type="submit">Add Transaction</button>
+    </form>
+
+    <a href="{% url 'transaction_list' %}">Back to Transaction List</a>
+  </body>
+</html>

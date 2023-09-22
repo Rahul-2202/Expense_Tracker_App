@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Users</title>
+  </head>
+  <body>
+    <h1>All Users</h1>
+    <ul>
+      {% for user in all_users %}
+      <li>
+        <strong>Username:</strong> {{ user.username }}<br />
+        <strong>Email:</strong> {{ user.email }}<br />
+        <strong>First Name:</strong> {{ user.first_name }}<br />
+        <strong>Last Name:</strong> {{ user.last_name }}<br />
+        <strong>Date Joined:</strong> {{ user.date_joined }}<br />
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete Income</title>
+  </head>
+  <body>
+    <h1>Delete Income</h1>
+    <p>
+      Are you sure you want to delete the income entry for "{{
+      income.income_category }}"?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete" />
+    </form>
+    <a href="{% url 'transactions'  %}">Cancel</a>
+  </body>
+</html>

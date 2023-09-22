@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Transaction List</title>
+  </head>
+  <body>
+    <h1>Transaction List</h1>
+
+    <ul>
+      {% for transaction in transactions %}
+      <li>
+        {% if transaction.income %}
+        <strong>Income</strong>
+        {% else %}
+        <strong>Expense</strong>
+        {% endif %}
+        <br />
+        Category: {{ transaction.income_category |
+        default:transaction.expense_category }}<br />
+        Amount: ${{
+        transaction.income_amount|default:transaction.expenses_amount }}<br />
+        Date: {{ transaction.datetime }}<br />
+        Description: {{
+        transaction.income_description|default:transaction.expenses_description
+        }}
+      </li>
+      {% empty %}
+      <p>No transactions.</p>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_income' %}">Add Income</a>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Transaction List</title>
+  </head>
+  <body>
+    <h1>Transaction List</h1>
+
+    <ul>
+      {% for transaction in transactions %}
+      <li>
+        {% if transaction.income %}
+        <strong>Income</strong>
+        {% else %}
+        <strong>Expense</strong>
+        {% endif %}
+        <br />
+        Category: {{ transaction.income_category if transaction.income else
+        transaction.expense_category }}<br />
+        Amount: ${{ transaction.income_amount if transaction.income else
+        transaction.expenses_amount }}<br />
+        Date: {{ transaction.datetime }}<br />
+        Description: {{ transaction.income_description if transaction.income
+        else transaction.expenses_description }}
+      </li>
+      {% empty %}
+      <p>No transactions.</p>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_income' %}">Add Income</a>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transaction List</title>
+  </head>
+  <body>
+    <h1>Transaction List</h1>
+
+    <ul>
+      {% for transaction in transactions %}
+      <li>
+        {% if transaction.income_amount %}
+        <strong>Income</strong>
+        <br />
+        Category: {{ transaction.income_category }}<br />
+        Amount: ${{ transaction.income_amount }}<br />
+        Date: {{ transaction.datetime }}<br />
+        Description: {{ transaction.income_description }}<br />
+        <a href="{% url 'edit_income' transaction.id %}">Edit Income</a>
+        <a href="{% url 'delete_income' transaction.id %}">Delete Income</a>
+        <br />
+        {% else %}
+        <strong>Expense</strong>
+        <br />
+        Category: {{ transaction.expense_category }}<br />
+        Amount: ${{ transaction.expenses_amount }}<br />
+        Date: {{ transaction.datetime }}<br />
+        Description: {{ transaction.expenses_description }}<br />
+        <a href="{% url 'edit_expense' transaction.id %}">Edit Expense</a>
+        <a href="{% url 'delete_expense' transaction.id %}">Delete Expense</a>
+        <br />
+        {% endif %}
+      </li>
+      {% empty %}
+      <p>No transactions.</p>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_income' %}">Add Income</a>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+  </body>
+</html>

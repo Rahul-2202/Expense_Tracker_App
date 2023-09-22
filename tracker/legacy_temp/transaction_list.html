@@ -1,0 +1,57 @@
+<!-- <h2>Transaction List</h2>
+<ul>
+  {% for transaction in transactions %}
+  <li>
+    <a href="{% url 'edit_transaction' transaction.id %}">Edit</a>
+    <a href="{% url 'delete_transaction' transaction.id %}">Delete</a>
+    Date: {{ transaction.date }} | Amount: {{ transaction.amount }} |
+    Description: {{ transaction.description }}
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'add_transaction' %}">Add Transaction</a> -->
+
+<!-- <h2>Transaction List</h2>
+<ul>
+  {% for transaction in transactions %}
+  <li>
+    Date: {{ transaction.date }} | Amount: {{ transaction.amount }} |
+    Description: {{ transaction.description }}
+
+    <form
+      method="POST"
+      action="{% url 'edit_transaction' transaction.id %}"
+      style="display: inline"
+    >
+      {% csrf_token %}
+      <button type="submit">Edit</button>
+    </form>
+
+    <form
+      method="POST"
+      action="{% url 'delete_transaction' transaction.id %}"
+      style="display: inline"
+    >
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'add_transaction' %}">Add Transaction</a> -->
+
+<h2>Transaction List</h2>
+<p>Total Income: {{ total_income }}</p>
+<p>Total Expense: {{ total_expense }}</p>
+<ul>
+  {% for transaction in transactions %}
+  <li>
+    <a href="{% url 'edit_transaction' transaction.id %}">Edit</a>
+    <a href="{% url 'delete_transaction' transaction.id %}">Delete</a>
+    Date: {{ transaction.date }} | Amount: {{ transaction.amount }} |
+    Description: {{ transaction.description }} | Category: {{
+    transaction.category }}
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'add_transaction' %}">Add Transaction</a>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete Expense</title>
+  </head>
+  <body>
+    <h1>Delete Expense</h1>
+    <p>
+      Are you sure you want to delete the expense entry for "{{
+      expense.expense_category }}"?
+    </p>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete" />
+    </form>
+    <a href="{% url 'transactions' %}">Cancel</a>
+  </body>
+</html>

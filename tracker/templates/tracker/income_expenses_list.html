@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Income and Expenses List</title>
+  </head>
+  <body>
+    <h1>Income and Expenses List</h1>
+
+    <h2>Income</h2>
+    <ul>
+      {% for income in income_list %}
+      <li>
+        Category: {{ income.income_category }}<br />
+        Amount: ${{ income.income_amount }}<br />
+        Date: {{ income.datetime }}<br />
+        Description: {{ income.income_description }}
+      </li>
+      {% empty %}
+      <p>No income entries.</p>
+      {% endfor %}
+    </ul>
+
+    <h2>Expenses</h2>
+    <ul>
+      {% for expense in expenses_list %}
+      <li>
+        Category: {{ expense.expense_category }}<br />
+        Amount: ${{ expense.expenses_amount }}<br />
+        Date: {{ expense.datetime }}<br />
+        Description: {{ expense.expenses_description }}
+      </li>
+      {% empty %}
+      <p>No expense entries.</p>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_income' %}">Add Income</a>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Income</title>
+  </head>
+  <body>
+    <h1>Edit Income</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <input type="submit" value="Save Changes" />
+    </form>
+    <a href="{% url 'transactions' %}">Cancel</a>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Shared Expense</title>
+  </head>
+  <body>
+    <h1>Create Shared Expense</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Create Expense</button>
+    </form>
+    <a href="{% url 'list_shared_expenses' %}">Back to Shared Expenses</a>
+  </body>
+</html>

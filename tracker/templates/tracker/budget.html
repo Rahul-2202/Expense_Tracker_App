@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Budget</title>
+  </head>
+  <body>
+    <h1>Budget</h1>
+
+    <h2>Set Budget Goals</h2>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <input type="submit" value="Set Budget Goal" />
+    </form>
+
+    <h2>Budget Goals</h2>
+    <ul>
+      {% for goal in budget_goals %}
+      <li>
+        Category: {{ goal.expense_category }}<br />
+        Goal Amount: ${{ goal.goal_amount }}<br />
+        Duration: {{ goal.get_duration_display }}<br />
+        Total Expenses: ${{ goal.total_expenses }}<br />
+        Progress: {{ goal.progress }}%<br />
+        <a href="{% url 'edit_budget_goal' goal.id %}">Edit Goal</a>
+        <a href="{% url 'delete_budget_goal' goal.id %}">Delete Goal</a>
+      </li>
+      {% empty %}
+      <p>No budget goals set.</p>
+      {% endfor %}
+    </ul>
+
+    <h2>Expense Categories</h2>
+    <ul>
+      {% for expense in expenses %}
+      <li>
+        Category: {{ expense.expense_category }}<br />
+        Amount: ${{ expense.expenses_amount }}<br />
+      </li>
+      {% empty %}
+      <p>No expenses.</p>
+      {% endfor %}
+    </ul>
+
+    <h2>Overall Budget</h2>
+    <p>Total Expenses: ${{ total_expenses }}</p>
+    <!-- Calculate and display the remaining budget based on user-set goals -->
+
+    <a href="{% url 'add_income' %}">Add Income</a>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+  </body>
+</html>

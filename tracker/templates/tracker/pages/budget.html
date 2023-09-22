@@ -1,0 +1,89 @@
+<!-- budget_combined.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style_trans.css' %}" />
+    <title>Expense Tracker</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar Section -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <h2>Expense<span class="danger">Tracker</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp"> close </span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="/">
+            <span class="material-icons-sharp"> dashboard </span>
+            <h3>Dashboard</h3>
+          </a>
+          <a href="/transactions">
+            <span class="material-icons-sharp"> receipt_long </span>
+            <h3>Statement & Activity</h3>
+          </a>
+          <a href="/budget" class="active">
+            <span class="material-icons-sharp"> paid </span>
+            <h3>Spending Control</h3>
+          </a>
+          <a href="/share-with-friends">
+            <span class="material-icons-sharp"> call_split </span>
+            <h3>Split with Friends</h3>
+          </a>
+
+          <a href="/contact">
+            <span class="material-icons-sharp"> help </span>
+            <h3>Help</h3>
+          </a>
+          <a href="/contact">
+            <span class="material-icons-sharp"> contact_page </span>
+
+            <h3>Contact</h3>
+          </a>
+          <a href="/logout">
+            <span class="material-icons-sharp"> logout </span>
+            <h3>Logout</h3>
+          </a>
+        </div>
+      </aside>
+
+      <h1>Budget</h1>
+
+      <!-- Form to create or edit a budget goal -->
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Save</button>
+      </form>
+
+      <!-- List of existing budget goals -->
+      <ul id="budget-list">
+        {% for goal in budget_goals %}
+        <li>
+          {{ goal.expense_category }} - Goal: {{ goal.goal_amount }} (Progress:
+          {{goal.progress }}%)
+
+          <a href="{% url 'budget_id' goal_id=goal.id %}">Edit</a>
+          <a href="{% url 'delete_budget_goal' goal.id %}">Delete</a>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Display total expenses -->
+      <p>Total Expenses: {{ total_expenses }}</p>
+    </div>
+  </body>
+</html>

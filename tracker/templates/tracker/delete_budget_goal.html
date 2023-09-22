@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delete Budget Goal</title>
+  </head>
+  <body>
+    <h1>Delete Budget Goal</h1>
+
+    <p>
+      Are you sure you want to delete the budget goal for "{{
+      goal.expense_category }}"?
+    </p>
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete" />
+    </form>
+
+    <a href="{% url 'budget' %}">Cancel</a>
+  </body>
+</html>

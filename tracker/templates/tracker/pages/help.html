@@ -1,0 +1,90 @@
+<!-- contact/templates/contact/contact_form.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}" />
+    <title>Expense Tracker</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar Section -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <h2>Expense<span class="danger">Tracker</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp"> close </span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="/">
+            <span class="material-icons-sharp"> dashboard </span>
+            <h3>Dashboard</h3>
+          </a>
+          <a href="/transactions">
+            <span class="material-icons-sharp"> receipt_long </span>
+            <h3>Statement & Activity</h3>
+          </a>
+          <a href="/budget">
+            <span class="material-icons-sharp"> paid </span>
+            <h3>Spending Control</h3>
+          </a>
+          <a href="/share-with-friends">
+            <span class="material-icons-sharp"> call_split </span>
+            <h3>Split with Friends</h3>
+          </a>
+
+          <a href="/contact" class="active">
+            <span class="material-icons-sharp"> help </span>
+            <h3>Help</h3>
+          </a>
+          <a href="/contact">
+            <span class="material-icons-sharp"> contact_page </span>
+
+            <h3>Contact</h3>
+          </a>
+          <a href="/logout">
+            <span class="material-icons-sharp"> logout </span>
+            <h3>Logout</h3>
+          </a>
+        </div>
+      </aside>
+
+      <main>
+        <div class="user-profile">
+          <h2>Contact Us</h2>
+          <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            <div>
+              <label for="{{ form.name.id_for_label }}">Your Name:</label>
+              {{ form.name }}
+            </div>
+            <div>
+              <label for="{{ form.email.id_for_label }}">Your Email:</label>
+              {{ form.email }}
+            </div>
+            <div>
+              <label for="{{ form.subject.id_for_label }}">Subject:</label>
+              {{ form.subject }}
+            </div>
+            <div>
+              <label for="{{ form.message.id_for_label }}">Message:</label>
+              {{ form.message }}
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

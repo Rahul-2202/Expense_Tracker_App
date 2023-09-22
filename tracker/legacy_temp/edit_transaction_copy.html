@@ -1,0 +1,57 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracker</title>
+  </head>
+  <body>
+    <h2>Edit Transaction</h2>
+    <form method="post" action="{% url 'edit_transaction' transaction.id %}">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'transaction_list' %}">Back to Transactions</a>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Transaction</title>
+</head>
+<body>
+    <h2>Edit Transaction</h2>
+
+    <form method="POST" action="{% url 'edit_transaction' transaction.id %}">
+        {% csrf_token %}
+
+        <!-- Date Input -->
+        <label for="id_date">Date:</label>
+        <input type="date" id="id_date" name="date" value="{{ transaction.date }}" required>
+
+        <!-- Amount Input -->
+        <label for="id_amount">Amount:</label>
+        <input type="number" step="0.01" id="id_amount" name="amount" value="{{ transaction.amount }}" required>
+
+        <!-- Description Input -->
+        <label for="id_description">Description:</label>
+        <input type="text" id="id_description" name="description" value="{{ transaction.description }}" required>
+
+        <!-- Transaction Type (Income or Expense) -->
+        <label for="id_type">Type:</label>
+        <select id="id_type" name="type" required>
+            <option value="+" {% if transaction.type == '+' %}selected{% endif %}>Income</option>
+            <option value="-" {% if transaction.type == '-' %}selected{% endif %}>Expense</option>
+        </select>
+
+        <!-- Expense Category Dropdown -->
+        {{ form.category.label_tag }}
+        {{ form.category }}
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="{% url 'transaction_list' %}">Back to Transaction List</a>
+</body>
+</html>

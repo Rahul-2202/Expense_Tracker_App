@@ -1,0 +1,272 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}" />
+    <title>Expense Tracker</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar Section -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <h2>Expense<span class="danger">Tracker</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp"> close </span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="/" class="active">
+            <span class="material-icons-sharp"> dashboard </span>
+            <h3>Dashboard</h3>
+          </a>
+          <a href="/transactions">
+            <span class="material-icons-sharp"> receipt_long </span>
+            <h3>Statement & Activity</h3>
+          </a>
+          <a href="/budget">
+            <span class="material-icons-sharp"> paid </span>
+            <h3>Spending Control</h3>
+          </a>
+          <a href="/share-with-friends">
+            <span class="material-icons-sharp"> call_split </span>
+            <h3>Split with Friends</h3>
+          </a>
+
+          <a href="/contact">
+            <span class="material-icons-sharp"> help </span>
+            <h3>Help</h3>
+          </a>
+          <a href="/contact">
+            <span class="material-icons-sharp"> contact_page </span>
+
+            <h3>Contact</h3>
+          </a>
+          <a href="/logout">
+            <span class="material-icons-sharp"> logout </span>
+            <h3>Logout</h3>
+          </a>
+        </div>
+      </aside>
+      <!-- End of Sidebar Section -->
+
+      <!-- Main Content -->
+      <main>
+        <h1>Analytics</h1>
+        <!-- Analyses -->
+        <div
+          class="analyse"
+        >
+        <canvas id="monthlyChart"></canvas>
+        </div>
+
+        
+        <div style="display: none;">
+            <div id="incomeData">
+                {{ monthly_income|json_script }}
+            </div>
+            <div id="expenseData">
+                {{ monthly_expenses|json_script }}
+            </div>
+        </div>
+        <!-- End of Analyses -->
+
+        <!-- Recent Orders Table -->
+        <div class="recent-orders">
+          <h2>Recent Activities</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for transaction in transactions %}
+              <tr>
+                <td>{{ transaction.datetime }}</td>
+                <td>
+                  {% if transaction.income_amount %}
+                  {{transaction.income_amount}} {% else %}
+                  {{transaction.expense_amount}} {% endif %}
+                </td>
+                <td>
+                  {% if transaction.income_description %}
+                  {{transaction.income_description }} {% else %}
+                  {{transaction.expense_description }} {% endif %}
+                </td>
+                <td>
+                  {% if transaction.income_amount %} Income {% else %} Expense
+                  {% endif %}
+                </td>
+                <td>
+                  {% if transaction.income_amount %}
+                  {{transaction.income_category }} {% else %}
+                  {{transaction.expense_category }} {% endif %}
+                </td>
+                <td>
+                  <a href="" class="action">
+                    <span class="material-icons-sharp"> delete </span>
+                  </a>
+                  <a href="" class="action">
+                    <span class="material-icons-sharp"> edit </span>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <a href="#">Show All</a>
+        </div>
+        <!-- End of Recent Orders -->
+      </main>
+      <!-- End of Main Content -->
+
+      <!-- Right Section -->
+      <div class="right-section">
+        <div class="nav">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
+          <div class="dark-mode">
+            <span class="material-icons-sharp active"> light_mode </span>
+            <span class="material-icons-sharp"> dark_mode </span>
+          </div>
+
+          <div class="profile">
+            <div class="info">
+              <p>Hey, <b>Rahul</b></p>
+              <small class="text-muted">Admin</small>
+            </div>
+            <div>
+              <button href="/signup" style="background-color:green; color:white;">Sign in</button>
+
+            </di>
+          </div>
+        </div>
+        <!-- End of Nav -->
+
+        <div class="user-profile">
+          <div>
+            <h4>Total Expense</h4>
+            <p style="color: red; font-weight: bold; font-size: 24px">
+              ₹{{ total_expenses }}
+            </p>
+          </div>
+          <div>
+            <h4>Total Income</h4>
+            <p style="color: green; font-weight: bold; font-size: 24px">
+              ₹{{ total_income }}
+            </p>
+          </div>
+        </div>
+
+        <div class="user-profile">
+          <h3>Bugdet Goals</h3>
+          <table>
+            <thead>
+              <tr>
+
+                <th>Category</th>
+                <th>Budeget Used % </th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for category, progress in budget_category_progress.items %}
+                <tr>
+                  <td>{{ category }}</td>
+                  <td>{{ progress }}%</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </div>
+
+        <div class="reminders">
+          <div class="notification add-reminder">
+            <a style="text-decoration: none;"href="/add_expense">
+            <div>
+              <span class="material-icons-sharp"> add </span>            
+              <h3>Add Expense</h3>
+            </div>
+            </a>
+          </div>
+          <div class="notification add-reminder">
+            <a href="/add_income">
+            <div>
+              <span class="material-icons-sharp"> add </span>
+              <h3>Add Income</h3>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          var ctx = document.getElementById('monthlyChart').getContext('2d');
+          var incomeData = JSON.parse('{{ monthly_income|escapejs }}');
+          var expenseData = JSON.parse('{{ monthly_expenses|escapejs }}');
+          var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          console.log('Income Data:', incomeData);
+           console.log('Expense Data:', expenseData);
+  
+          var chartData = {
+              labels: months,
+              datasets: [
+                  {
+                      label: 'Income',
+                      backgroundColor: 'rgba(75, 192, 70, 0.5)', // Green color
+                      borderColor: 'rgba(75, 192, 68, 1)',
+                      borderWidth: 1,
+                      data: incomeData.map(item => item.total_income),
+                  },
+                  {
+                      label: 'Expenses',
+                      backgroundColor: 'rgba(255, 99, 132, 0.5)', // Red color
+                      borderColor: 'rgba(255, 99, 132, 1)',
+                      borderWidth: 1,
+                      data: expenseData.map(item => item.total_expenses),
+                  },
+              ],
+          };
+  
+          var config = {
+              type: 'bar',
+              data: chartData,
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true,
+                      },
+                  },
+              },
+          };
+  
+          var myChart = new Chart(ctx, config);
+      });
+  </script>
+  
+    
+  </body>
+</html>

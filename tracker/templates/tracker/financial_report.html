@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Financial Report</title>
+  </head>
+  <body>
+    <h1>Financial Report</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Total Income</th>
+          <th>Total Expenses</th>
+          <th>Savings</th>
+          <th>Major Expense Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in financial_data %}
+        <tr>
+          <td>{{ data.month }}</td>
+          <td>${{ data.total_income }}</td>
+          <td>${{ data.total_expenses }}</td>
+          <td>${{ data.savings }}</td>
+          <td>{{ data.major_expense_category }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{% url 'budget' %}">Back to Budget</a>
+  </body>
+</html>

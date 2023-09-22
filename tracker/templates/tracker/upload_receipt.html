@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Receipt</title>
+  </head>
+  <body>
+    <h1>Upload Receipt</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Upload Receipt</button>
+    </form>
+  </body>
+</html>

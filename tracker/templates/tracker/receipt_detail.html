@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Receipt Details</title>
+  </head>
+  <body>
+    <h1>Receipt Details</h1>
+    <p>Uploaded by: {{ receipt.uploaded_by }}</p>
+    <p>Upload Date: {{ receipt.upload_date }}</p>
+    <img src="{{ receipt.receipt_image.url }}" alt="Receipt Image" />
+    <!-- Add other receipt details as needed -->
+    <a href="{% url 'receipt_list' %}">Back to Receipt List</a>
+  </body>
+</html>

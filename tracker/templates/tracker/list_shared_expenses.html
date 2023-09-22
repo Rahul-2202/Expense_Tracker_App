@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List Shared Expenses</title>
+  </head>
+  <body>
+    <h1>List Shared Expenses</h1>
+    <ul>
+      {% for expense in shared_expenses %}
+      <li>
+        Amount: ${{ expense.amount }}<br />
+        Date: {{ expense.date }}<br />
+        Participants: {% for participant in expense.participants.all %}
+        {{participant.username }} {% if not forloop.last %}, {% endif %}
+        {%endfor%}
+        <br />
+        Description: {{ expense.description }}<br />
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'create_shared_expense' %}">Create Shared Expense</a>
+  </body>
+</html>
